@@ -48,6 +48,11 @@ ZEND_BEGIN_ARG_INFO_EX(arginfo_git_tree_get_entry, 0, 0, 1)
     ZEND_ARG_INFO(0, position)
 ZEND_END_ARG_INFO()
 
+ZEND_BEGIN_ARG_INFO_EX(arginfo_git_tree_get_entry_by_name, 0, 0, 1)
+    ZEND_ARG_INFO(0, name)
+ZEND_END_ARG_INFO()
+
+
 ZEND_BEGIN_ARG_INFO_EX(arginfo_git_tree_remove, 0, 0, 1)
     ZEND_ARG_INFO(0, name)
 ZEND_END_ARG_INFO()
@@ -200,6 +205,24 @@ PHP_METHOD(git_tree, getEntry)
     RETURN_ZVAL(git_tree_entry,0, 1);
 }
 
+PHP_METHOD(git_tree, getEntryByName)
+{
+    php_git_tree_t *this = (php_git_tree_t *) zend_object_store_get_object(getThis() TSRMLS_CC);
+    git_tree_entry *entry;
+    zval *git_tree_entry;
+    char *name;
+    long length = 0;
+
+    if(zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC,
+    "s", &name, &length) == FAILURE){
+        return;
+    }
+
+    entry = git_tree_entry_byname(this->object,name);
+    create_tree_entry_from_entry(&git_tree_entry, entry,this->repository);
+    RETURN_ZVAL(git_tree_entry,0, 1);
+}
+
 PHP_METHOD(git_tree, getEntries)
 {
     php_git_tree_t *this = (php_git_tree_t *) zend_object_store_get_object(getThis() TSRMLS_CC);
@@ -285,6 +308,7 @@ static zend_function_entry php_git_tree_methods[] = {
     PHP_ME(git_tree, getIterator, NULL,                        ZEND_ACC_PUBLIC)
     PHP_ME(git_tree, count,       NULL,                        ZEND_ACC_PUBLIC)
     PHP_ME(git_tree, path,        arginfo_git_tree_path,       ZEND_ACC_PUBLIC)
+    PHP_ME(git_tree, getEntryByName, arginfo_git_tree_get_entry_by_name, ZEND_ACC_PUBLIC)
     {NULL, NULL, NULL}
 };
 
