@@ -159,8 +159,8 @@ PHP_METHOD(git_walker, reset)
 
 PHP_METHOD(git_walker, sort)
 {
-    int mode = 0;
     php_git_walker_t *myobj;
+    int mode = 0;
     if(zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC,
         "l", &mode) == FAILURE){
         return;
