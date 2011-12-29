@@ -136,7 +136,7 @@ PHP_METHOD(git_tree_entry, isSubmodule)
     php_git_tree_entry_t *this = (php_git_tree_entry_t *) zend_object_store_get_object(getThis() TSRMLS_CC);
     int attribute = git_tree_entry_attributes(this->entry);
 
-    if(attribute & 160000){
+    if(attribute == 0160000){
         RETURN_TRUE;
     }else{
         RETURN_FALSE;
