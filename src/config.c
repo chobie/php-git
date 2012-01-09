@@ -106,6 +106,7 @@ static int php_git_config_foreach(const char *key, void *data)
 
 PHP_METHOD(git_config, parseFile)
 {
+/*
     git_config_foreach_t t;
     git_config *config;
     zval *zconf;
@@ -137,6 +138,7 @@ PHP_METHOD(git_config, parseFile)
     git_config_free(config);
     
     RETURN_ZVAL(zconf,0,1);
+*/
 }
 
 static zend_function_entry php_git_config_methods[] = {

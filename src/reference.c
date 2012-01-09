@@ -114,6 +114,7 @@ PHP_METHOD(git_reference, getName)
 
 PHP_METHOD(git_reference, setName)
 {
+/* @todo
     php_git_reference_t *this = (php_git_reference_t *) zend_object_store_get_object(getThis() TSRMLS_CC);
     char *name;
     int name_len = 0;
@@ -125,18 +126,7 @@ PHP_METHOD(git_reference, setName)
 
     git_reference_set_name(this->object, name);
     add_property_string_ex(getThis() ,"name",sizeof("name"),name, 1 TSRMLS_CC);
-}
-
-PHP_METHOD(git_reference, write)
-{
-    php_git_reference_t *this = (php_git_reference_t *) zend_object_store_get_object(getThis() TSRMLS_CC);
-
-    int ret = git_reference_write(this->object);
-    if(ret != GIT_SUCCESS) {
-        php_error_docref(NULL TSRMLS_CC, E_ERROR,"can't write reference. something wrong");
-        RETURN_FALSE;
-    }
-    RETURN_TRUE;
+*/
 }
 
 
@@ -194,7 +184,8 @@ PHP_METHOD(git_reference, __construct)
         php_error_docref(NULL TSRMLS_CC, E_ERROR,"specified parameter doesn't Git\\Repository");
         RETURN_FALSE;
     }
-    
+ 
+/* @todo   
     res = git_reference_new(&refs,repository->repository);
     if(res != GIT_SUCCESS) {
         php_error_docref(NULL TSRMLS_CC, E_ERROR,"can't create Git\\Reference. something wrong.");
@@ -211,6 +202,7 @@ PHP_METHOD(git_reference, __construct)
     } else {
         this->object = refs;
     }
+*/
 }
 
 PHP_METHOD(git_reference, getId)
@@ -230,7 +222,6 @@ static zend_function_entry php_git_reference_methods[] = {
     PHP_ME(git_reference, getType,     NULL, ZEND_ACC_PUBLIC)
     PHP_ME(git_reference, getName,     NULL, ZEND_ACC_PUBLIC)
     PHP_ME(git_reference, getId,       NULL, ZEND_ACC_PUBLIC)
-    PHP_ME(git_reference, write,       NULL, ZEND_ACC_PUBLIC)
     PHP_ME(git_reference, setName,     arginfo_git_reference_set_name, ZEND_ACC_PUBLIC)
     PHP_ME(git_reference, setTarget,   arginfo_git_reference_set_target, ZEND_ACC_PUBLIC)
     PHP_ME(git_reference, setOID,      arginfo_git_reference_set_oid, ZEND_ACC_PUBLIC)

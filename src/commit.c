@@ -134,7 +134,8 @@ PHP_METHOD(git_commit, getShortMessage)
     php_git_commit_t *this = (php_git_commit_t *) zend_object_store_get_object(getThis() TSRMLS_CC);
     const char *message;
     
-    message = git_commit_message_short(this->object);
+    //@todo
+    //message = git_commit_message_short(this->object);
     RETURN_STRING(message,1);
 }
 

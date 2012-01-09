@@ -226,6 +226,7 @@ PHP_METHOD(git_reference_manager, lookup)
 
 PHP_METHOD(git_reference_manager, create)
 {
+/* @todo
     php_git_reference_manager_t *this = (php_git_reference_manager_t *) zend_object_store_get_object(getThis() TSRMLS_CC);
     char *name;
     int name_len = 0;
@@ -251,7 +252,7 @@ PHP_METHOD(git_reference_manager, create)
     }
     
     git_oid_fromstr(&id, oid);
-    odb = git_repository_database(this->repository);
+    odb = git_repository_odb(this->repository);
     
     if(!git_odb_exists(odb,&id)){
         zend_throw_exception_ex(spl_ce_InvalidArgumentException, 0 TSRMLS_CC,
@@ -288,6 +289,7 @@ PHP_METHOD(git_reference_manager, create)
     git_oid_to_string(out,GIT_OID_HEXSZ+1,git_reference_oid(refobj->object));
     add_property_string_ex(ref,"oid",sizeof("oid"),out, 1 TSRMLS_CC);
     RETURN_ZVAL(ref,0,0);
+*/
 }
 
 static zend_function_entry php_git_reference_manager_methods[] = {

@@ -103,6 +103,7 @@ PHP_METHOD(git_tag, getTarget)
 
 PHP_METHOD(git_tag, __construct)
 {
+/* @todo
     php_git_tag_t *this = (php_git_tag_t *) zend_object_store_get_object(getThis() TSRMLS_CC);
     php_git_repository_t *r_obj;
     zval *repository;
@@ -125,6 +126,7 @@ PHP_METHOD(git_tag, __construct)
     if(ret != GIT_SUCCESS){
         php_error_docref(NULL TSRMLS_CC, E_WARNING, "can't create Git\\Tag.");
     }
+*/
 }
 
 
