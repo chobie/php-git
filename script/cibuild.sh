@@ -1,3 +1,6 @@
+export NO_INTERACTION=1
+export TESTS="--show-diff -q"
+
 ls -la $TRAVIS_BUILD_DIR
 mkdir $TRAVIS_BUILD_DIR/libgit2/build
 cd $TRAVIS_BUILD_DIR/libgit2/build
